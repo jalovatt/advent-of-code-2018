@@ -1,4 +1,4 @@
-const input = require("./07-input.js");
+const input = require("./input.js");
 
 const example = [
   "Step C must be finished before step A can begin.",

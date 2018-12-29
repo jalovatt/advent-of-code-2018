@@ -1,6 +1,7 @@
+console.log("DOES NOT WORK");
 
 const {assert} = require("chai");
-const input = require("./08-input.js");
+const input = require("./input.js");
 
 const example = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2";
 

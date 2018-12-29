@@ -1,8 +1,10 @@
 /*
 */
 
-const input = require("./05-input.js");
+const input = require("./input.js");
 const example = "dabAcCaCBAcCcaDA";
+
+console.log("Might take a while...");
 
 function stripReactions(input) {
 

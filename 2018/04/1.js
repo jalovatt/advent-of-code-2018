@@ -2,7 +2,7 @@
 */
 
 const {assert} = require("chai");
-const input = require("./04-input.js");
+const input = require("./input.js");
 
 const exampleInput = [
 
@@ -123,81 +123,58 @@ function printSchedule(sched) {
 
 const sched = makeSchedule(data);
 
-// printSchedule(sched);
+
+const shiftTotals = sched.map((shift) => {
+  return {id: shift.id, total: shift.mins.reduce((a,b) => a + b) }
+})
 
 
-
-// const shiftTotals = sched.map((shift) => {
-//   return {id: shift.id, total: shift.mins.reduce((a,b) => a + b) }
-// });
-
-// function sleepTotals(shiftTotals) {
-
-//   const out = {};
-//   shiftTotals.forEach((shift) => {
-//     if (out[shift.id]) {
-//       out[shift.id] += shift.total;
-//     } else {
-//       out[shift.id] = shift.total;
-//     }
-//   });
-
-//   return out;
-
-// }
-
-// function sleepiestGuard(totals) {
-
-//   let id;
-//   Object.keys(totals).forEach((guard) => {
-//     if (!id || totals[guard] > totals[id]) id = guard;
-//   });
-
-//   return parseInt(id);
-
-// }
-
-// const mostTimeAsleep = sleepiestGuard(sleepTotals(shiftTotals));
-// console.log(`Guard ${mostTimeAsleep} spends the most time asleep`);
-
-function sumSleepMinutes(sched) {
+function sleepTotals(shiftTotals) {
 
   const out = {};
-  sched.forEach((shift) => {
-
-    if (!out[shift.id]) out[shift.id] = Array(60).fill(0);
-    shift.mins.map((val, idx) => out[shift.id][idx] += val);
-
+  shiftTotals.forEach((shift) => {
+    if (out[shift.id]) {
+      out[shift.id] += shift.total;
+    } else {
+      out[shift.id] = shift.total;
+    }
   });
 
   return out;
 
 }
 
-const summed = sumSleepMinutes(sched);
+function sleepiestGuard(totals) {
 
-function findMax(summed) {
-
-  let max;
-  Object.keys(summed).forEach((guard) => {
-
-    const guardMax = Math.max(...summed[guard]);
-    const idx = summed[guard].indexOf(guardMax);
-
-    if (!max || guardMax > max.val) {
-      max = {id: guard, val: guardMax, idx};
-    }
-
+  let id;
+  Object.keys(totals).forEach((guard) => {
+    if (!id || totals[guard] > totals[id]) id = guard;
   });
 
-  return {id: parseInt(max.id), val: max.val, idx: max.idx};
+  return parseInt(id);
 
 }
 
-const sleepiest = findMax(summed);
+const mostTimeAsleep = sleepiestGuard(sleepTotals(shiftTotals));
+console.log(`Guard ${mostTimeAsleep} spends the most time asleep`);
 
-// const sum = sumSleepMinutes(sched, mostTimeAsleep);
+function sumSleepMinutes(sched, guard) {
 
-// const likeliest = sum.indexOf(Math.max(...sum));
-console.log(`Guard ${sleepiest.id} is most likely to be asleep at minute ${sleepiest.idx}`);
-console.log("Solution: " + (sleepiest.id * sleepiest.idx) );
+  const sum = Array(60).fill(0);
+
+  sched.forEach((shift) => {
+
+    if (shift.id !== guard) return;
+    shift.mins.map((val, idx) => sum[idx] += val);
+
+  });
+
+  return sum;
+
+}
+
+const sum = sumSleepMinutes(sched, mostTimeAsleep);
+
+const likeliest = sum.indexOf(Math.max(...sum));
+console.log(`Guard ${mostTimeAsleep} is most likely to be asleep at minute ${likeliest}`);
+console.log("Solution: " + (mostTimeAsleep * likeliest) );

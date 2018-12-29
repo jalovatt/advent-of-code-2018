@@ -1,4 +1,4 @@
-const input = require("./10-input.js");
+const input = require("./input.js");
 
 const example = [
   "position=< 9,  1> velocity=< 0,  2>",

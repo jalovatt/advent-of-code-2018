@@ -1,8 +1,5 @@
-/*
-*/
-
 const {assert} = require("chai");
-const input = require("./?-input.js");
+const input = require("./input.js");
 
 describe("Examples", () => {
 

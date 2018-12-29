@@ -56,7 +56,7 @@ function findLargestVariableSubsquare(rack) {
 
   const sums = [];
 
-  for (let i = 0; i < 300; i++) {
+  for (let i = 0; i < 20; i++) {
     const sum = findLargestSubsquare(rack, i);
     sum.size = i;
     console.log(`\tsum @ size ${i}: ` + JSON.stringify(sum));
@@ -67,6 +67,4 @@ function findLargestVariableSubsquare(rack) {
 
 }
 
-const maxVarSum = findLargestVariableSubsquare(input);
-console.log(maxVarSum);
-console.log(maxVarSum.sum);
+findLargestVariableSubsquare(input);

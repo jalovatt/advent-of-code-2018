@@ -1,7 +1,7 @@
 /*
 */
 
-const input = require("./12-input.js");
+const input = require("./input.js");
 
 const example = {
   state: "#..#.#..##......###...###",

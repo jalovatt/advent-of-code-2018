@@ -1,7 +1,6 @@
-/*
-*/
+console.log("DOES NOT WORK");
 
-const input = require("./06-input.js");
+const input = require("./input.js");
 const example = [
   {x: 1, y: 1},
   {x: 1, y: 6},
@@ -84,7 +83,7 @@ function stripInfinites(points, graph) {
 
 
 const possible = stripInfinites(input, graph);
-console.log(possible);
+// console.log(possible);
 
 function countCells(idx, graph) {
 
